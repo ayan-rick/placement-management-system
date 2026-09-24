@@ -42,6 +42,32 @@ const getStudentById = async (id) => {
     return result.rows[0];
 };
 
+
+const getStudentProfile = async (id) => {
+    const result = await pool.query(`
+        SELECT
+            s.id,
+            s.user_id,
+            s.name,
+            s.roll_number,
+            s.cgpa,
+            s.backlogs,
+            d.id AS department_id,
+            d.name AS department,
+            b.id AS batch_id,
+            b.year AS batch
+        FROM students s
+        LEFT JOIN departments d
+            ON s.department_id = d.id
+        LEFT JOIN batches b
+            ON s.batch_id = b.id
+        WHERE s.id = $1;
+    `, [id]);
+
+    return result.rows[0];
+};
+
+
 const createStudent = async ({
     user_id,
     department_id,
@@ -135,6 +161,7 @@ const deleteStudent = async (id) => {
 module.exports = {
     getAllStudents,
     getStudentById,
+    getStudentProfile,
     createStudent,
     updateStudent,
     deleteStudent
