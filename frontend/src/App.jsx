@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import PlacementDrives from "./pages/PlacementDrives";
 import PlacementDriveDetails from "./pages/PlacementDriveDetails";
 import MyApplications from "./pages/MyApplications";
+import MyProfile from "./pages/MyProfile";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -58,6 +59,15 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+
+                    <Route
+                        path="/profile"
+                        element={
+                            <ProtectedRoute>
+                                <MyProfile />
+                            </ProtectedRoute>
+                        }
+                    />                                     
                     
                     <Route
                         path="/"

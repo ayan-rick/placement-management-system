@@ -65,7 +65,9 @@ const Dashboard = () => {
                             Dashboard
                         </button>
 
-                        <button>
+                        <button
+                            onClick={() => navigate("/profile")}
+                        >
                             My Profile
                         </button>
 
@@ -108,7 +110,9 @@ const Dashboard = () => {
                     Dashboard
                 </button>
 
-                <button>
+                <button
+                    onClick={() => navigate("/profile")}
+                >
                     My Profile
                 </button>
 
