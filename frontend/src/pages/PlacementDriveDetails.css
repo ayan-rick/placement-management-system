@@ -1,0 +1,245 @@
+.drive-details-page {
+    min-height: 100vh;
+    padding: 30px;
+    background: #f5f7fb;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-button {
+    border: none;
+    background: transparent;
+    color: #2563eb;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.back-button:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.drive-details-card {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 14px;
+    padding: 32px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.drive-details-header {
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+}
+
+.drive-details-header h1 {
+    margin: 12px 0 8px;
+    font-size: 30px;
+    color: #111827;
+}
+
+.drive-company {
+    margin: 0;
+    color: #6b7280;
+}
+
+.drive-details-status {
+    display: inline-block;
+    background: #dcfce7;
+    color: #166534;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.drive-description-section {
+    margin-bottom: 30px;
+}
+
+.drive-description-section h2,
+.eligibility-section h2 {
+    font-size: 20px;
+    color: #111827;
+    margin-bottom: 12px;
+}
+
+.drive-description-section p {
+    color: #4b5563;
+    line-height: 1.7;
+}
+
+
+/* =========================
+   INFORMATION
+========================= */
+
+.drive-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 25px 0;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.drive-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.drive-info-item span {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.drive-info-item strong {
+    font-size: 16px;
+    color: #111827;
+}
+
+
+/* =========================
+   ELIGIBILITY
+========================= */
+
+.eligibility-section {
+    padding: 25px 0;
+}
+
+.eligibility-section ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.eligibility-section li {
+    margin-bottom: 10px;
+    color: #4b5563;
+}
+
+
+/* =========================
+   APPLY
+========================= */
+
+.apply-section {
+    padding-top: 10px;
+}
+
+.apply-button {
+    width: 100%;
+    border: none;
+    background: #2563eb;
+    color: white;
+    padding: 13px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.apply-button:hover {
+    background: #1d4ed8;
+}
+
+
+/* =========================
+   LOADING / ERROR
+========================= */
+
+.drive-details-loading {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #374151;
+}
+
+.drive-details-error {
+    max-width: 900px;
+    margin: 0 auto 20px;
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+    .drive-details-page {
+        padding: 20px;
+    }
+
+    .drive-details-card {
+        padding: 22px;
+    }
+
+    .drive-details-header h1 {
+        font-size: 24px;
+    }
+
+    .drive-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================
+   APPLICATION MESSAGES
+========================= */
+
+.application-success {
+    background: #dcfce7;
+    color: #166534;
+    padding: 14px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.application-error {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 14px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.apply-button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+}

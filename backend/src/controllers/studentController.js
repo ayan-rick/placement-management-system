@@ -69,6 +69,32 @@ const getStudentProfile = async (req, res) => {
     }
 };
 
+const getMyProfile = async (req, res) => {
+    try {
+        const student = await studentModel.getMyProfile(req.user.id);
+
+        if (!student) {
+            return res.status(404).json({
+                success: false,
+                message: "Student profile not found"
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            data: student
+        });
+
+    } catch (error) {
+        console.error("Error fetching my profile:", error.message);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch profile"
+        });
+    }
+};
+
 const createStudent = async (req, res) => {
     try {
         const {
@@ -185,6 +211,7 @@ module.exports = {
     getStudents,
     getStudentById,
     getStudentProfile,
+    getMyProfile,
     createStudent,
     updateStudent,
     deleteStudent
