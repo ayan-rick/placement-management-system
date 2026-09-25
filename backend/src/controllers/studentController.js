@@ -95,6 +95,100 @@ const getMyProfile = async (req, res) => {
     }
 };
 
+const updateMyProfile = async (req, res) => {
+    try {
+        const {
+            roll_number,
+            name,
+            cgpa,
+            backlogs
+        } = req.body;
+
+        // Basic validation
+        if (!name || !roll_number) {
+            return res.status(400).json({
+                success: false,
+                message: "Name and roll number are required"
+            });
+        }
+
+        if (cgpa === undefined || cgpa === null) {
+            return res.status(400).json({
+                success: false,
+                message: "CGPA is required"
+            });
+        }
+
+        if (backlogs === undefined || backlogs === null) {
+            return res.status(400).json({
+                success: false,
+                message: "Backlogs are required"
+            });
+        }
+
+        // Convert CGPA to number
+        const cgpaNumber = Number(cgpa);
+
+        // Validate CGPA
+        if (
+            !Number.isFinite(cgpaNumber) ||
+            cgpaNumber < 0 ||
+            cgpaNumber > 10
+        ) {
+            return res.status(400).json({
+                success: false,
+                message: "CGPA must be a number between 0 and 10"
+            });
+        }
+
+        // Validate backlogs
+        if (Number(backlogs) < 0 || !Number.isInteger(Number(backlogs))) {
+            return res.status(400).json({
+                success: false,
+                message: "Backlogs must be a non-negative integer"
+            });
+        }
+
+        const student = await studentModel.updateMyProfile(
+            req.user.id,
+            {
+                roll_number,
+                name,
+                cgpa: cgpaNumber,
+                backlogs
+            }
+        );
+
+        if (!student) {
+            return res.status(404).json({
+                success: false,
+                message: "Student profile not found"
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Profile updated successfully",
+            data: student
+        });
+
+        } catch (error) {
+        console.error("Error updating my profile:", error.message);
+
+        if (error.code === "23505") {
+            return res.status(409).json({
+                success: false,
+                message: "Roll number already exists"
+            });
+        }
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to update profile"
+        });
+    }
+};
+
 const createStudent = async (req, res) => {
     try {
         const {
@@ -212,6 +306,7 @@ module.exports = {
     getStudentById,
     getStudentProfile,
     getMyProfile,
+    updateMyProfile,
     createStudent,
     updateStudent,
     deleteStudent

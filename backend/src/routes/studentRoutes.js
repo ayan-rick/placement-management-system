@@ -12,6 +12,12 @@ router.get(
     studentController.getMyProfile
 );
 
+router.put(
+    "/profile",
+    authenticateToken,
+    studentController.updateMyProfile
+);
+
 router.get("/:id", studentController.getStudentById);
 router.get("/:id/profile", studentController.getStudentProfile);
 router.post("/", studentController.createStudent);

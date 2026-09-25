@@ -91,6 +91,43 @@ const getMyProfile = async (userId) => {
     return result.rows[0];
 };
 
+const updateMyProfile = async (
+    userId,
+    {
+        roll_number,
+        name,
+        cgpa,
+        backlogs
+    }
+) => {
+    const result = await pool.query(`
+        UPDATE students
+        SET
+            roll_number = $1,
+            name = $2,
+            cgpa = $3,
+            backlogs = $4
+        WHERE user_id = $5
+        RETURNING
+            id,
+            user_id,
+            department_id,
+            batch_id,
+            roll_number,
+            name,
+            cgpa,
+            backlogs;
+    `, [
+        roll_number,
+        name,
+        cgpa,
+        backlogs,
+        userId
+    ]);
+
+    return result.rows[0];
+};
+
 const createStudent = async ({
     user_id,
     department_id,
@@ -186,6 +223,7 @@ module.exports = {
     getStudentById,
     getStudentProfile,
     getMyProfile,
+    updateMyProfile,
     createStudent,
     updateStudent,
     deleteStudent
