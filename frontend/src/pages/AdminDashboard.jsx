@@ -1,23 +1,58 @@
+import { useEffect, useState } from "react";
 import AdminSidebar from "../components/AdminSidebar";
+import api from "../services/api";
 
 const AdminDashboard = () => {
 
-    const stats = [
+    const [stats, setStats] = useState({
+        students: 0,
+        companies: 0,
+        drives: 0,
+        applications: 0,
+    });
+
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                const response = await api("/admin/stats");
+
+                setStats(response.data);
+
+            } catch (error) {
+                console.error(
+                    "Error fetching dashboard statistics:",
+                    error
+                );
+
+                setError("Failed to load dashboard statistics");
+
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchStats();
+    }, []);
+
+    const statCards = [
         {
             title: "Total Students",
-            value: 6,
+            value: stats.students,
         },
         {
             title: "Total Companies",
-            value: 1,
+            value: stats.companies,
         },
         {
             title: "Placement Drives",
-            value: 2,
+            value: stats.drives,
         },
         {
             title: "Applications",
-            value: 1,
+            value: stats.applications,
         },
     ];
 
@@ -38,9 +73,21 @@ const AdminDashboard = () => {
                     </p>
                 </div>
 
+                {loading && (
+                    <p className="text-gray-600 mb-4">
+                        Loading dashboard statistics...
+                    </p>
+                )}
+
+                {error && (
+                    <p className="text-red-600 mb-4">
+                        {error}
+                    </p>
+                )}
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-                    {stats.map((stat) => (
+                    {statCards.map((stat) => (
                         <div
                             key={stat.title}
                             className="bg-white rounded-lg shadow p-6"

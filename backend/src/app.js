@@ -7,6 +7,7 @@ const applicationRoutes = require("./routes/applicationRoutes");
 const placementDriveRoutes = require("./routes/placementDriveRoutes");
 const eligibilityRoutes = require("./routes/eligibilityRoutes");
 const authRoutes = require("./routes/authRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 const app = express();
 
@@ -31,5 +32,6 @@ app.use("/api/applications", applicationRoutes);
 app.use("/api/placement-drives", placementDriveRoutes);
 app.use("/api/eligibility", eligibilityRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/admin", adminRoutes);
 
 module.exports = app;
