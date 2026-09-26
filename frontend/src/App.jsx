@@ -8,6 +8,7 @@ import PlacementDrives from "./pages/PlacementDrives";
 import PlacementDriveDetails from "./pages/PlacementDriveDetails";
 import MyApplications from "./pages/MyApplications";
 import MyProfile from "./pages/MyProfile";
+import AdminDashboard from "./pages/AdminDashboard";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -67,6 +68,11 @@ function App() {
                                 <MyProfile />
                             </ProtectedRoute>
                         }
+                    />
+
+                    <Route
+                        path="/admin/dashboard"
+                        element={<AdminDashboard />}
                     />                                     
                     
                     <Route
