@@ -10,6 +10,7 @@ import MyApplications from "./pages/MyApplications";
 import MyProfile from "./pages/MyProfile";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminStudents from "./pages/AdminStudents";
+import AdminCompanies from "./pages/AdminCompanies";
 import AdminRoute from "./components/AdminRoute";
 
 
@@ -83,6 +84,11 @@ function App() {
                         <Route
                             path="/admin/students"
                             element={<AdminStudents />}
+                        />
+
+                        <Route
+                            path="/admin/companies"
+                            element={<AdminCompanies />}
                         />
 
                     </Route>

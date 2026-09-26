@@ -92,8 +92,16 @@ const deleteCompany = async (req, res) => {
             message: "Company deleted successfully",
             company
         });
+
     } catch (error) {
         console.error(error);
+
+        if (error.code === "23503") {
+            return res.status(409).json({
+                message: "Cannot delete company because it is associated with existing records."
+            });
+        }
+
         res.status(500).json({
             message: "Error deleting company"
         });
