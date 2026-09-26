@@ -2,10 +2,17 @@ const express = require("express");
 const router = express.Router();
 
 const studentController = require("../controllers/studentController");
-const { authenticateToken } = require("../middleware/authMiddleware");
 
-router.get("/", studentController.getStudents);
+const {
+    authenticateToken
+} = require("../middleware/authMiddleware");
 
+const {
+    authorizeRoles
+} = require("../middleware/roleMiddleware");
+
+
+// Student's own profile
 router.get(
     "/profile",
     authenticateToken,
@@ -18,10 +25,48 @@ router.put(
     studentController.updateMyProfile
 );
 
-router.get("/:id", studentController.getStudentById);
-router.get("/:id/profile", studentController.getStudentProfile);
-router.post("/", studentController.createStudent);
-router.put("/:id", studentController.updateStudent);
-router.delete("/:id", studentController.deleteStudent);
+
+// Admin student management
+router.get(
+    "/",
+    authenticateToken,
+    authorizeRoles("admin"),
+    studentController.getStudents
+);
+
+router.get(
+    "/:id",
+    authenticateToken,
+    authorizeRoles("admin"),
+    studentController.getStudentById
+);
+
+router.get(
+    "/:id/profile",
+    authenticateToken,
+    authorizeRoles("admin"),
+    studentController.getStudentProfile
+);
+
+router.post(
+    "/",
+    authenticateToken,
+    authorizeRoles("admin"),
+    studentController.createStudent
+);
+
+router.put(
+    "/:id",
+    authenticateToken,
+    authorizeRoles("admin"),
+    studentController.updateStudent
+);
+
+router.delete(
+    "/:id",
+    authenticateToken,
+    authorizeRoles("admin"),
+    studentController.deleteStudent
+);
 
 module.exports = router;
