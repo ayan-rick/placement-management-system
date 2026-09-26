@@ -9,7 +9,9 @@ import PlacementDriveDetails from "./pages/PlacementDriveDetails";
 import MyApplications from "./pages/MyApplications";
 import MyProfile from "./pages/MyProfile";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminStudents from "./pages/AdminStudents";
 import AdminRoute from "./components/AdminRoute";
+
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -72,12 +74,19 @@ function App() {
                     />
 
                     <Route element={<AdminRoute />}>
+
                         <Route
                             path="/admin/dashboard"
                             element={<AdminDashboard />}
                         />
+
+                        <Route
+                            path="/admin/students"
+                            element={<AdminStudents />}
+                        />
+
                     </Route>
-                    
+
                     <Route
                         path="/"
                         element={
